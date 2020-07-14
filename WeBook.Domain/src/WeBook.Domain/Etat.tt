@@ -1,0 +1,49 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension="Gen.cs" #>
+using System.Collections.Generic;
+namespace webook.domain
+{
+    /// <summary>
+    /// @see https://fr.wikipedia.org/wiki/ISO_3166
+    /// Cette norme définit des codes pour la quasi-totalité des pays du monde,
+    /// y compris pour certains territoires (îles en général), non habités de façon permanente. 
+    /// Chacune de ces entités reçoit ainsi un code à deux lettres, 
+    /// un code à trois lettres et un code numérique
+    /// </summary>
+    public  readonly partial struct Etat{
+    <#
+	var path = Host.ResolvePath(string.Empty);
+    var file = Path.Combine(path, "states.csv");
+    List<string> etats=new List<string>();
+    using (StreamReader reader = new StreamReader(file))
+	{
+        while (!reader.EndOfStream)
+		{
+            string line = reader.ReadLine();
+            if(line.Replace(";","").Trim().Length==0)continue;
+            if(line.Contains("#N/A"))continue;
+            string[] keyValue = line.Split(';');
+            string nom=keyValue[0];
+            string a2=keyValue[1];
+            string a3=keyValue[2];
+            string codep=keyValue[3];
+            string nomdevise=keyValue[4];
+            string devise=keyValue[5];
+            string codedevise=keyValue[6];
+            etats.Add(a2);
+            #>public static Etat <#=a2 #>=new Etat("<#=nom#>","<#=a2#>","<#=a3#>",<#=codep#>,"<#=nomdevise#>","<#=devise#>",<#=codedevise#>);
+            <#
+
+        }
+    }#>
+    public static List<Etat> Etats=new List<Etat>(){
+        <#=string.Join(",",etats)#>
+    };
+    
+    }
+}

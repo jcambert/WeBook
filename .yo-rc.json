@@ -1,0 +1,166 @@
+{
+  "generator-micros": {
+    "api": {
+      "name": "WeBook.api",
+      "path": "WeBook.api/src/WeBook.api",
+      "project": "WeBook.api/src/WeBook.api/WeBook.api.csproj"
+    },
+    "domain": {
+      "name": "WeBook.Domain",
+      "path": "WeBook.Domain/src/WeBook.Domain",
+      "project": "WeBook.Domain/src/WeBook.Domain/WeBook.Domain.csproj"
+    },
+    "services": [
+      {
+        "name": "WeBook.Services.ChannelManager",
+        "path": "WeBook.Services.ChannelManager/src/WeBook.Services.ChannelManager",
+        "project": "WeBook.Services.ChannelManager/src/WeBook.Services.ChannelManager/WeBook.Services.ChannelManager.csproj"
+      },
+      {
+        "name": "WeBook.Services.Identity",
+        "path": "WeBook.Services.Identity/src/WeBook.Services.Identity",
+        "project": "WeBook.Services.Identity/src/WeBook.Services.Identity/WeBook.Services.Identity.csproj"
+      },
+      {
+        "name": "WeBook.Services.Operations",
+        "path": "WeBook.Services.Operations/src/WeBook.Services.Operations",
+        "project": "WeBook.Services.Operations/src/WeBook.Services.Operations/WeBook.Services.Operations.csproj"
+      },
+      {
+        "name": "WeBook.services.SignalR",
+        "path": "WeBook.services.SignalR/src/WeBook.services.SignalR",
+        "project": "WeBook.services.SignalR/src/WeBook.services.SignalR/WeBook.services.SignalR.csproj"
+      }
+    ],
+    "author": {
+      "name": "Ambert Jean-Christophe",
+      "email": "jc.ambert@free.fr",
+      "url": "http://jc.ambert.free.fr"
+    },
+    "availables": [
+      "micros:domain",
+      "micros:handler",
+      "micros:api"
+    ],
+    "answers": {
+      "appname": "webook",
+      "service": {
+        "name": "WeBook.Services.ChannelManager",
+        "path": "WeBook.Services.ChannelManager/src/WeBook.Services.ChannelManager",
+        "project": "WeBook.Services.ChannelManager/src/WeBook.Services.ChannelManager/WeBook.Services.ChannelManager.csproj"
+      },
+      "domain": "propriete",
+      "subdoc": false,
+      "entity": true,
+      "crud": true,
+      "mongo": true,
+      "props": [
+        {
+          "name": "Nom",
+          "type": "string",
+          "isprimitive": true,
+          "dynamic": false
+        },
+        {
+          "name": "Telephone",
+          "type": "string",
+          "isprimitive": true,
+          "dynamic": false
+        },
+        {
+          "name": "Fax",
+          "type": "string",
+          "isprimitive": true,
+          "dynamic": false
+        },
+        {
+          "name": "Email",
+          "type": "string",
+          "isprimitive": true,
+          "dynamic": false
+        },
+        {
+          "name": "SiteWeb",
+          "type": "string",
+          "isprimitive": true,
+          "dynamic": false
+        },
+        {
+          "name": "NomDuContact",
+          "type": "string",
+          "isprimitive": true,
+          "dynamic": false
+        },
+        {
+          "name": "PrenomDuContact",
+          "type": "string",
+          "isprimitive": true,
+          "dynamic": false
+        },
+        {
+          "name": "Devise",
+          "type": "string",
+          "isprimitive": true,
+          "dynamic": false
+        },
+        {
+          "name": "SymboleDeDeviseAvantLePrix",
+          "type": "string",
+          "isprimitive": true,
+          "dynamic": false
+        },
+        {
+          "name": "SymboleDeDeviseApresLePrix",
+          "type": "string",
+          "isprimitive": true,
+          "dynamic": false
+        },
+        {
+          "name": "TypeDeLocation",
+          "type": "string",
+          "isprimitive": true,
+          "dynamic": false
+        },
+        {
+          "name": "IdentifiantAutorite",
+          "type": "string",
+          "isprimitive": true,
+          "dynamic": false
+        },
+        {
+          "name": "OrdreAffichage",
+          "type": "int",
+          "isprimitive": true,
+          "dynamic": false
+        },
+        {
+          "name": "PolitiqueGenerale",
+          "type": "string",
+          "isprimitive": true,
+          "dynamic": true
+        },
+        {
+          "name": "PolitiqueAnnulation",
+          "type": "string",
+          "isprimitive": true,
+          "dynamic": true
+        }
+      ]
+    },
+    "micros": true,
+    "generators": [
+      "micros:domain",
+      "micros:handler",
+      "micros:api"
+    ],
+    "promptValues": {
+      "appname": "webook",
+      "service": {
+        "name": "WeBook.Services.ChannelManager",
+        "path": "WeBook.Services.ChannelManager/src/WeBook.Services.ChannelManager",
+        "project": "WeBook.Services.ChannelManager/src/WeBook.Services.ChannelManager/WeBook.Services.ChannelManager.csproj"
+      },
+      "domain": "propriete"
+    }
+  }
+}

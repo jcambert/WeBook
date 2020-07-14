@@ -1,0 +1,67 @@
+@identityServiceUrl = https://localhost:15002
+
+@user = "jc.admin@free.fr"
+@pwd = "secret"
+@role = "admin"
+
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMjY2OTQ5MjM0Njg0MzVkYWQzN2I4ZmZjNzQwODg0YyIsInVuaXF1ZV9uYW1lIjoiYjI2Njk0OTIzNDY4NDM1ZGFkMzdiOGZmYzc0MDg4NGMiLCJqdGkiOiIyZDIwNDQ5Mi1kYTEwLTQzNmEtYjg5YS0yNjhmYWE0Y2RjNmEiLCJpYXQiOiIxNTk0MzAyNDI0MzQ0IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiYWRtaW4iLCJuYmYiOjE1OTQzMDI0MjQsImV4cCI6MTU5NDQ4MjQyNCwiaXNzIjoid2Vib29rLWlkZW50aXR5LXNlcnZpY2UifQ.FQ54Dw4glLlexrdWkK5Y7KsozGz7IG0sMCO31I2w6zs
+@refreshToken = AQAAAAEAACcQAAAAENvI5pfeLs8oxd8lsylRSHeRptpwHfvqb3GakrWUz9PsL18eejzmn9Q2jV9glbog
+# ================= IDENTITY SERVICE ======================= #
+### ping alive
+GET {{identityServiceUrl}}/ping
+### Sign up as admin
+POST {{identityServiceUrl}}/identity/sign-up
+content-type: application/json
+
+{
+	"email": {{user}},
+	"password": {{pwd}},
+	"role": {{role}}
+}
+
+### Sign in as admin
+POST {{identityServiceUrl}}/identity/sign-in
+content-type: application/json
+
+{
+	"email": {{user}},
+	"password": {{pwd}}
+}
+
+# Once authenticated, copy the obtained accessToken and update the @accessToken parameter above.
+### Get your identity
+GET {{identityServiceUrl}}/identity/me
+Authorization:Bearer {{accessToken}}
+
+### Change password
+PUT {{identityServiceUrl}}/identity/me/password
+authorization: Bearer {{accessToken}}
+content-type: application/json
+
+{
+	"currentPassword": "secret",
+	"newPassword": "very_secret"
+}
+
+### Generate a new access token by updating @refreshToken parameter above
+POST  {{identityServiceUrl}}/tokens/access-tokens/{{refreshToken}}/refresh
+content-type: application/json
+
+{
+}
+
+### Revoke a current access token
+POST {{identityServiceUrl}}/tokens/access-tokens/revoke
+authorization: Bearer {{accessToken}}
+content-type: application/json
+
+{
+}
+
+### Revoke a current refresh token
+POST {{identityServiceUrl}}/tokens/refresh-tokens/{{refreshToken}}/revoke
+authorization: Bearer {{accessToken}}
+content-type: application/json
+
+{
+}

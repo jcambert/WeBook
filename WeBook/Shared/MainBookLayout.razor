@@ -1,0 +1,49 @@
+﻿@inherits LayoutComponentBase
+<WeNavBar IsFixedTop="true" IsExpand="true" IsDark="true" BackgroundColor="Color.Light">
+    <WeNavbarBrand>
+        <a class="header_logo" href="https://www.booking.com/index.fr.html?aid=397594&amp;label=gog235jc-1DCAEoggI46AdIDVgDaE2IAQGYAQ24ARfIAQzYAQPoAQH4AQKIAgGoAgO4Ar_Gt_cFwAIB0gIkZWQ2NTc2MmMtZTVkMC00OTQ0LTk0YTQtNGI4M2QyYmJmZWE42AIE4AIB&amp;sid=6a2f06860d6cf456c234b40381f413c8&amp;srpvid=66586915b03202ca&amp;click_from_logo=1" style="text-decoration: none;">
+            <img id="logo" class="" src="https://q-cf.bstatic.com/static/img/b26logo/booking_logo_retina/22615963add19ac6b6d715a97c8d477e8b95b7ea.png" alt="Booking.com réservations d'hôtels en ligne">
+        </a>
+    </WeNavbarBrand>
+    <WeNavbarToggler @onclick="onclick"></WeNavbarToggler>
+
+    <WeCollapse  IsOpen="@IsOpen" IsNavbar="true">
+        <WeNav IsList="true" IsNavbar="true" Class="mr-auto">
+            <WeNavItem IsDropdown="true">
+                <WeDropdownToggle Color="Color.Light">Devise: €uros</WeDropdownToggle>
+                <WeDropdownMenu>
+                    <WeDropdownItem>Dollars Américains $</WeDropdownItem>
+                    <WeDropdownItem>Franc Suisse CHF</WeDropdownItem>
+                    <WeDropdownItem IsDivider="true"></WeDropdownItem>
+                    <WeDropdownItem>Autres Devises</WeDropdownItem>
+                </WeDropdownMenu>
+            </WeNavItem>
+            <WeNavItem IsDropdown="true">
+                <WeDropdownToggle Color="Color.Light">Langue: Francais</WeDropdownToggle>
+                <WeDropdownMenu>
+                    <WeDropdownItem>English US</WeDropdownItem>
+                    <WeDropdownItem>English UK</WeDropdownItem>
+                    <WeDropdownItem>Español </WeDropdownItem>
+                    <WeDropdownItem>Deutsch </WeDropdownItem>
+                    <WeDropdownItem>Italiano </WeDropdownItem>
+                    <WeDropdownItem IsDivider="true"></WeDropdownItem>
+                    <WeDropdownItem>Autres langues</WeDropdownItem>
+                </WeDropdownMenu>
+            </WeNavItem>
+            <WeNavItem>
+                <WeButton ButtonType="ButtonType.Link">
+                    <span class="glyphicon glyphicon-print"><WeBadge Color="Color.Light">2</WeBadge></span>
+                </WeButton>
+            </WeNavItem>
+        </WeNav>
+    </WeCollapse>
+</WeNavBar>
+@code{
+    bool IsOpen { get; set; } = true;
+    void onclick(MouseEventArgs e)
+    {
+        IsOpen = !IsOpen;
+        StateHasChanged();
+        Console.WriteLine("Navbar Class->" + IsOpen.ToString());
+    }
+}

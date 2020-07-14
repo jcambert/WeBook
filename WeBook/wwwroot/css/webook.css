@@ -1,0 +1,78 @@
+﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    color: #333;
+    font-size: small;
+    line-height: 1.2;
+}
+
+a:visited {
+    color: #6b6b6b;
+    font-weight: bold;
+}
+
+a:link {
+    color: #0071c2;
+    font-weight: bold;
+}
+
+#top[role="banner"] {
+    background: #003580;
+    color: white;
+    width: 100%;
+    border: 0;
+    padding: 10px 0;
+}
+#top[role="banner"] .container .row{
+    min-height:54px;
+}
+
+#top[role="banner"] .container a.header_logo {
+    position: absolute
+}
+
+#top[role="banner"] .container a img#logo {
+    top: 12px;
+    width: 130px;
+}
+
+#logo {
+    top: 23px;
+    left: 7px;
+}
+
+#top[role="banner"] .user-form {
+    float: right;
+}
+
+#top[role="banner"] .user-form ul {
+    list-style-type: none;
+}
+
+#top[role="banner"] .user-form ul > li {
+    float: right;
+    border-left: 1px solid #800055;
+    position: relative;
+}
+    #top[role="banner"] .user-form ul > li a>img{
+        width:20px;
+    }
+    #top[role="banner"] .user-form ul > li a.popover-trigger {
+        font-weight: bold;
+        font-size: 20px;
+        direction: ltr;
+        text-decoration: none;
+        padding: 17px;
+        display: block;
+        color: #f1f1f1;
+        line-height: 16px;
+        white-space: nowrap;
+    }
+    

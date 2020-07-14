@@ -1,0 +1,101 @@
+﻿@page "/"
+@using  MicroS_Common.Services.SignalR
+@inject IJSRuntime js
+@inject MicroS_Common.Services.SignalR.SignalrOptions signalrOptions
+@inject NavigationManager nav
+<h3>MicroS SignalR messages</h3>
+<WeForm Model="Token" TModel="WeToken" ValidateOnInit="true">
+    <WeDataAnnotationsValidator />
+    <WeInput InputType="InputType.TextArea" @bind-Value="Token.Jwt" ValidateOnChange="true" cols="100" rows="5" Class="form-control"></WeInput>
+
+    <WeButton ButtonType="ButtonType.Submit" Color="Color.Primary" Class="@ConnectClass" OnClick="Connect">Connect</WeButton>
+    <WeButton ButtonType="ButtonType.Button" Color="Color.Danger" Class="@DisconnectClass" OnClick="Disconnect">Disconnect</WeButton>
+    <WeButton ButtonType="ButtonType.Button" Color="Color.Danger" Class="@DisconnectClass" OnClick="Clear">Clear</WeButton>
+</WeForm>
+
+
+<hr />
+<ul class="list-group" id="messages">
+    @foreach (var message in messages)
+    {
+        <li class="list-group-item list-group-item-@message.Item2">
+            @message.Item1
+            @if (!string.IsNullOrEmpty( message.Item3 ))
+            {
+                <div>@message.Item3</div>
+            }
+        </li>
+    }
+</ul>
+@code{
+    public class WeToken
+    {
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Jwt { get; set; } = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMjY2OTQ5MjM0Njg0MzVkYWQzN2I4ZmZjNzQwODg0YyIsInVuaXF1ZV9uYW1lIjoiYjI2Njk0OTIzNDY4NDM1ZGFkMzdiOGZmYzc0MDg4NGMiLCJqdGkiOiIyZDIwNDQ5Mi1kYTEwLTQzNmEtYjg5YS0yNjhmYWE0Y2RjNmEiLCJpYXQiOiIxNTk0MzAyNDI0MzQ0IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiYWRtaW4iLCJuYmYiOjE1OTQzMDI0MjQsImV4cCI6MTU5NDQ4MjQyNCwiaXNzIjoid2Vib29rLWlkZW50aXR5LXNlcnZpY2UifQ.FQ54Dw4glLlexrdWkK5Y7KsozGz7IG0sMCO31I2w6zs";
+    }
+    public WeToken Token { get; set; } = new WeToken();
+    private List<(string, string, string)> messages = new List<(string, string, string)>();
+    private DotNetObjectReference<Index> thisref;
+    private string ConnectClass =>
+        new WeStringBuilder()
+        .Add("hidden", IsConnected)
+        .ToString();
+    private string DisconnectClass =>
+        new WeStringBuilder()
+        .Add("hidden", !IsConnected)
+        .ToString();
+
+    public bool IsConnected { get; private set; } = false;
+    async Task Connect()
+    {
+        await js.InvokeVoidAsync("wesignalr.connect", Token.Jwt);
+    }
+    async Task Disconnect()
+    {
+        await js.InvokeVoidAsync("wesignalr.disconnect");
+    }
+    void Clear()
+    {
+        messages.Clear();
+        InvokeAsync(() => StateHasChanged());
+    }
+
+    #region JSInvokable
+    [JSInvokable]
+    public void Connected()
+    {
+        IsConnected = true;
+        InvokeAsync(() => StateHasChanged());
+    }
+    [JSInvokable]
+    public void Disconnected()
+    {
+        IsConnected = false;
+        InvokeAsync(() => StateHasChanged());
+    }
+    [JSInvokable]
+    public void AppendMessage(string message, string type, string data)
+    {
+        messages.Add((message, type, data));
+        InvokeAsync(() => StateHasChanged());
+    }
+    #endregion
+
+    #region Lifecycle
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        thisref = DotNetObjectReference.Create(this);
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await js.InvokeVoidAsync("wesignalr.init", thisref, signalrOptions.ConnectionString(nav));
+
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+    #endregion
+
+}
