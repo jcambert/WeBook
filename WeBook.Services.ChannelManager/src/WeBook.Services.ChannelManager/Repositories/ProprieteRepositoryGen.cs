@@ -3,6 +3,7 @@
 using AutoMapper;
 using MicroS_Common.Mongo;
 using MicroS_Common.Repository;
+using System;
 using webook.domain.proprietes.Domain;
 using webook.domain.proprietes.Dto;
 using webook.domain.proprietes.Queries;
@@ -21,7 +22,7 @@ namespace WeBook.Services.ChannelManager.Repositories
     /// <summary>
     /// Propriete Repository for intereaction with database
     /// </summary>
-    public interface IBrowseProprieteRepository : IBrowseRepository<Propriete,BrowseProprietes,ProprieteDto>{}
+    public interface IBrowseProprieteRepository : IBrowseRepository<Propriete,Guid,BrowseProprietes,ProprieteDto>{}
     #endregion 
 
     #region Implementation
@@ -29,9 +30,9 @@ namespace WeBook.Services.ChannelManager.Repositories
     /// Propriete Repository for intereaction with database
     /// </summary>
     [Repository(typeof(IBrowseProprieteRepository))]
-    public partial class ProprieteRepository : BrowseRepository<Propriete,BrowseProprietes,ProprieteDto>,IBrowseProprieteRepository 
+    public partial class ProprieteRepository : BrowseRepository<Propriete,Guid,BrowseProprietes,ProprieteDto>,IBrowseProprieteRepository 
     {
-        public ProprieteRepository(IMongoRepository<Propriete> repository, IMapper mapper) : base(repository,mapper){}
+        public ProprieteRepository(IMongoRepository<Propriete,Guid> repository, IMapper mapper) : base(repository,mapper){}
         
     }
     #endregion

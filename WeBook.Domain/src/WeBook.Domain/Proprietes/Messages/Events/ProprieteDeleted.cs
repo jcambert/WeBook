@@ -11,7 +11,7 @@ namespace webook.domain.proprietes.Messages.Events
     public class ProprieteDeleted:ProprieteBaseEvent
     {
 
-        public Guid Id { get; }
+        public override Guid Id { get; }
 
         public ProprieteDeleted(Guid id)
         {

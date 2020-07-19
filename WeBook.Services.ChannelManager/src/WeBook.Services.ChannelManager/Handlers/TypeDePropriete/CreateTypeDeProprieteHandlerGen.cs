@@ -21,7 +21,7 @@ namespace WeBook.Services.ChannelManager.Handlers
     /// <summary>
     /// Delete TypeDePropriete Handler
     /// </summary>
-    public partial class CreateTypeDeProprieteHandler : DomainCommandHandler<CreateTypeDePropriete,TypeDePropriete>
+    public partial class CreateTypeDeProprieteHandler : DomainCommandHandler<CreateTypeDePropriete,TypeDePropriete,string>
     {
         
 
@@ -38,7 +38,7 @@ namespace WeBook.Services.ChannelManager.Handlers
         /// </summary>
         /// <param name="command">The command in wich information can be use do check if the model exist in database</param>
         /// <returns>Nothing</returns>
-        protected override async Task<bool> CheckExist(Guid id)
+        protected override async Task<bool> CheckExist(string id)
         {
             if (await base.CheckExist(id))
             {
@@ -61,7 +61,7 @@ namespace WeBook.Services.ChannelManager.Handlers
             await base.HandleAsync(command, context);
 
             var product = GetDomainObject(command);
-            
+            product.CreatedDate = product.UpdatedDate = DateTime.Now;
             await Repository.AddAsync(product);
 
             await BusPublisher.PublishAsync(CreateEvent<TypeDeProprieteCreated>(command), context);

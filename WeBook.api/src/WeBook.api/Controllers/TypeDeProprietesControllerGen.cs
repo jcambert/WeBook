@@ -1,10 +1,13 @@
+using MicroS_Common;
 using MicroS_Common.Controllers;
+using MicroS_Common.Dispatchers;
 using MicroS_Common.Mvc;
 using MicroS_Common.RabbitMq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using OpenTracing;
 using System;
 using System.Threading.Tasks;
@@ -25,79 +28,10 @@ namespace webook.api.Controllers
     /// TypeDePropriete Controller that represent tha main API layer
     /// on wich each request must be made
     /// </summary>
-#if !DEBUG
-    [AdminAuth]
-#else
-    [AllowAnonymous]
-#endif
-    [Route("typeDeProprietes")]
-    public partial class TypeDeProprietesController : BaseController
+    public partial class TypeDeProprietesController : DispatcherBaseController
     {
-#region private variables
-        private readonly ITypeDeProprietesService _typeDeProprietesService;
-        private readonly ILogger<CreateTypeDePropriete> _logger;
-#endregion
-
-#region constructors
-        public TypeDeProprietesController(
-            IBusPublisher busPublisher, 
-            ITracer tracer,
-            ITypeDeProprietesService typeDeProprietesService,ILogger<CreateTypeDePropriete>logger) : base(busPublisher, tracer)
+        public TypeDeProprietesController(IBusPublisher busPublisher, ITracer tracer, IDispatcher dispatcher, IConfiguration configuration, IOptions<AppOptions> appOptions) : base(busPublisher, tracer, dispatcher, configuration, appOptions)
         {
-            _typeDeProprietesService = typeDeProprietesService;
-            _logger = logger;
         }
-#endregion
-
-#region public functions
-         /// <summary>
-        ///  Make a get query 
-        /// </summary>
-        /// <param name="query">The Query</param>
-        /// <returns>A list of result</returns>
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> Get([FromQuery] BrowseTypeDeProprietes query)
-            => Collection(await _typeDeProprietesService.BrowseAsync(query));
-
-        /// <summary>
-        /// Search an Unique typeDePropriete based on its id
-        /// </summary>
-        /// <param name="id">The Id to search</param>
-        /// <returns>The typeDePropriete</returns>
-        [HttpGet("{id}")]
-        [AllowAnonymous]
-        public async Task<IActionResult> Get(Guid id)
-            => Single(await _typeDeProprietesService.GetAsync(id));
-
-        /// <summary>
-        ///  Create a new typeDePropriete
-        /// </summary>
-        /// <param name="command">The Create Command</param>
-        /// <returns>Accepted response: The the operation Service</returns>
-        [HttpPost]
-        public async Task<IActionResult> Post(CreateTypeDePropriete command)
-            => await SendAsync(command.BindId(c => c.Id,_logger),  resourceId: command.Id, resource: "typeDeProprietes");
-
-        /// <summary>
-        /// Update a typeDePropriete
-        /// </summary>
-        /// <param name="id">the id of typeDePropriete to update</param>
-        /// <param name="command">The Update Command</param>
-        /// <returns>Accepted response: The the operation Service</returns>
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, UpdateTypeDePropriete command)
-            => await SendAsync(command.Bind(c => c.Id, id),resourceId: command.Id, resource: "typeDeProprietes");
-
-        /// <summary>
-        /// Delete a typeDePropriete
-        /// </summary>
-        /// <param name="id">the id of typeDePropriete to delete</param>
-        /// <returns>Accepted response: The the operation Service</returns>
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
-            => await SendAsync(new DeleteTypeDePropriete(id));
-
-#endregion
     }
 }

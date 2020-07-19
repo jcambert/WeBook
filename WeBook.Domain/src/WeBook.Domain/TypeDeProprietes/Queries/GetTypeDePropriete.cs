@@ -14,7 +14,7 @@ namespace webook.domain.typeDeProprietes.Queries
     {
         #region public properties
         
-            public Guid Id { get; set; }
+            public string Id { get; set; }
         
         #endregion
         

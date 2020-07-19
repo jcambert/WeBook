@@ -9,7 +9,7 @@ using MicroS_Common.Messages;
 namespace webook.domain.typeDeProprietes.Messages.Commands
 {
     [MessageNamespace("typeDeProprietes")]
-    public abstract class TypeDeProprieteBaseCommand : BaseCommand
+    public abstract class TypeDeProprieteBaseCommand : BaseCommand<string>
     {
 
         public TypeDeProprieteBaseCommand() : base()

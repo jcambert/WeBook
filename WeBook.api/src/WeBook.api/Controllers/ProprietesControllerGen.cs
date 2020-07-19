@@ -1,10 +1,13 @@
+using MicroS_Common;
 using MicroS_Common.Controllers;
+using MicroS_Common.Dispatchers;
 using MicroS_Common.Mvc;
 using MicroS_Common.RabbitMq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using OpenTracing;
 using System;
 using System.Threading.Tasks;
@@ -25,75 +28,11 @@ namespace webook.api.Controllers
     /// Propriete Controller that represent tha main API layer
     /// on wich each request must be made
     /// </summary>
-    [AdminAuth]
-    [Route("proprietes")]
-    public partial class ProprietesController : BaseController
+
+    public partial class ProprietesController : DispatcherBaseController
     {
-        #region private variables
-        private readonly IProprietesService _proprietesService;
-        private readonly ILogger<CreatePropriete> _logger;
-        #endregion
-
-        #region constructors
-        public ProprietesController(
-            IBusPublisher busPublisher, 
-            ITracer tracer,
-            IProprietesService proprietesService,ILogger<CreatePropriete>logger) : base(busPublisher, tracer)
+        public ProprietesController(IBusPublisher busPublisher, ITracer tracer, IDispatcher dispatcher, IConfiguration configuration, IOptions<AppOptions> appOptions) : base(busPublisher, tracer, dispatcher, configuration, appOptions)
         {
-            _proprietesService = proprietesService;
-            _logger = logger;
         }
-        #endregion
-
-        #region public functions
-         /// <summary>
-        ///  Make a get query 
-        /// </summary>
-        /// <param name="query">The Query</param>
-        /// <returns>A list of result</returns>
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> Get([FromQuery] BrowseProprietes query)
-            => Collection(await _proprietesService.BrowseAsync(query));
-
-        /// <summary>
-        /// Search an Unique propriete based on its id
-        /// </summary>
-        /// <param name="id">The Id to search</param>
-        /// <returns>The propriete</returns>
-        [HttpGet("{id}")]
-        [AllowAnonymous]
-        public async Task<IActionResult> Get(Guid id)
-            => Single(await _proprietesService.GetAsync(id));
-
-        /// <summary>
-        ///  Create a new propriete
-        /// </summary>
-        /// <param name="command">The Create Command</param>
-        /// <returns>Accepted response: The the operation Service</returns>
-        [HttpPost]
-        public async Task<IActionResult> Post(CreatePropriete command)
-            => await SendAsync(command.BindId(c => c.Id,_logger),  resourceId: command.Id, resource: "proprietes");
-
-        /// <summary>
-        /// Update a propriete
-        /// </summary>
-        /// <param name="id">the id of propriete to update</param>
-        /// <param name="command">The Update Command</param>
-        /// <returns>Accepted response: The the operation Service</returns>
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, UpdatePropriete command)
-            => await SendAsync(command.Bind(c => c.Id, id),resourceId: command.Id, resource: "proprietes");
-
-        /// <summary>
-        /// Delete a propriete
-        /// </summary>
-        /// <param name="id">the id of propriete to delete</param>
-        /// <returns>Accepted response: The the operation Service</returns>
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
-            => await SendAsync(new DeletePropriete(id));
-
-        #endregion
     }
 }

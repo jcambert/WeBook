@@ -12,7 +12,7 @@ namespace webook.domain.typeDeProprietes.Messages.Events
 {
     public class TypeDeProprieteUpdated : TypeDeProprieteCreated
     {
-        public TypeDeProprieteUpdated(Guid id,Property<string> nom) 
+        public TypeDeProprieteUpdated(string id,Property<string> nom) 
         : base(id,nom)
         {
         }

@@ -14,9 +14,10 @@ using MicroS_Common.Types;
 /// </summary>
 namespace webook.domain.proprietes.Domain
 {
-    [MongoDocument("propriete")]
+    [MongoDocument(COLLECTION_NAME)]
     public partial class Propriete : BaseEntity
     {
+        public const string COLLECTION_NAME = "propriete";
         #region private variables
 
 
@@ -25,9 +26,9 @@ namespace webook.domain.proprietes.Domain
         #region public properties
         [BsonElement("nom"),BsonRequired]
         public string Nom { get; set; }
-        [BsonElement("telephone")]
+        [BsonElement("telephone"),BsonIgnoreIfNull]
         public string Telephone { get; set; }
-        [BsonElement("fax")]
+        [BsonElement("fax"), BsonIgnoreIfNull]
         public string Fax { get; set; }
         [BsonElement("email"),BsonRequired]
         public string Email { get; set; }
@@ -44,7 +45,7 @@ namespace webook.domain.proprietes.Domain
         [BsonElement("symbapresprix")]
         public string SymboleDeDeviseApresLePrix { get; set; }
         [BsonElement("typloc")]
-        public Guid TypeDeLocation { get; set; }
+        public string TypeDeLocation { get; set; }
         [BsonElement("idaut")]
         public string IdentifiantAutorite { get; set; }
         [BsonElement("ordre")]
@@ -61,7 +62,7 @@ namespace webook.domain.proprietes.Domain
         #region Constructeur
         public Propriete() : base() { }
 
-        public Propriete(string nom, string telephone, string fax, string email, string siteweb, string nomducontact, string prenomducontact, string devise, string symbolededeviseavantleprix, string symbolededeviseapresleprix, Guid typedelocation, string identifiantautorite, int ordreaffichage, Property<string> politiquegenerale, Property<string> politiqueannulation, Adresse adresse)
+        public Propriete(string nom, string telephone, string fax, string email, string siteweb, string nomducontact, string prenomducontact, string devise, string symbolededeviseavantleprix, string symbolededeviseapresleprix, string typedelocation, string identifiantautorite, int ordreaffichage, Property<string> politiquegenerale, Property<string> politiqueannulation, Adresse adresse)
             : base()
         {
             Nom = nom;

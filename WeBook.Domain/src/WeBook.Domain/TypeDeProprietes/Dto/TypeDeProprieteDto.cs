@@ -1,3 +1,4 @@
+using MicroS_Common.Types;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using WeCommon;
 /// </summary>
 namespace webook.domain.typeDeProprietes.Dto
 {
-    public partial class TypeDeProprieteDto
+    public partial class TypeDeProprieteDto:EntityDto<string>
     {
 
         #region private variables
@@ -20,7 +21,7 @@ namespace webook.domain.typeDeProprietes.Dto
 
         #region public properties
 
-        public Guid Id { get; set; }
+        //public Guid Id { get; set; }
         [BsonSerializer(typeof(DynamicSerializer<dynamic, string>))]
         public dynamic Nom { get; set; }
 

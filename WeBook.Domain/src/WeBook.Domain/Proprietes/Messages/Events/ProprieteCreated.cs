@@ -12,7 +12,7 @@ namespace webook.domain.proprietes.Messages.Events
 {
     public class ProprieteCreated : ProprieteBaseEvent
     {
-        public Guid Id { get; }
+        public override Guid Id { get; }
 
         public string  Nom{get;}
         public string  Telephone{get;}

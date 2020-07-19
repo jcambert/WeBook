@@ -23,7 +23,7 @@ namespace WeBook.Services.ChannelManager.Handlers
     /// <summary>
     /// Delete TypeDePropriete Handler
     /// </summary>
-    public partial class DeleteTypeDeProprieteHandler : DomainCommandHandler<DeleteTypeDePropriete, TypeDePropriete>
+    public partial class DeleteTypeDeProprieteHandler : DomainCommandHandler<DeleteTypeDePropriete, TypeDePropriete,string>
     {
         #region Constructors
         public DeleteTypeDeProprieteHandler(
@@ -39,7 +39,7 @@ namespace WeBook.Services.ChannelManager.Handlers
         /// </summary>
         /// <param name="command">The command in wich information can be use do check if the model exist in database</param>
         /// <returns>Nothing</returns>
-        protected override async Task<bool> CheckExist(Guid id)
+        protected override async Task<bool> CheckExist(string id)
         {
             if (!await base.CheckExist(id))
             {

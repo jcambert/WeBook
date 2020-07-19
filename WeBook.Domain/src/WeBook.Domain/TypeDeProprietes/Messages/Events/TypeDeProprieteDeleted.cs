@@ -11,9 +11,9 @@ namespace webook.domain.typeDeProprietes.Messages.Events
     public class TypeDeProprieteDeleted:TypeDeProprieteBaseEvent
     {
 
-        public Guid Id { get; }
+        public override string Id { get; }
 
-        public TypeDeProprieteDeleted(Guid id)
+        public TypeDeProprieteDeleted(string id)
         {
             Id = id;
         }

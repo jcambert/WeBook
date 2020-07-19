@@ -8,7 +8,7 @@ using MicroS_Common.Messages;
 namespace webook.domain.typeDeProprietes.Messages.Events
 {
     [MessageNamespace("typeDeProprietes")]
-    public abstract class TypeDeProprieteBaseEvent:BaseEvent
+    public abstract class TypeDeProprieteBaseEvent:BaseEvent<string>
     {
     }
 }

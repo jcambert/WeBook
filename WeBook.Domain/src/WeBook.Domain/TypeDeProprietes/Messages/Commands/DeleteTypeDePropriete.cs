@@ -13,8 +13,8 @@ namespace webook.domain.typeDeProprietes.Messages.Commands
     public class DeleteTypeDePropriete: TypeDeProprieteBaseCommand
     {
         
-        public override Guid Id { get; set; }
-        public DeleteTypeDePropriete(Guid id) : base()
+        public override string Id { get; set; }
+        public DeleteTypeDePropriete(string id) : base()
         {
             this.Id = id;
         }

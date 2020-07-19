@@ -18,15 +18,14 @@ namespace webook.domain.typeDeProprietes.Messages.Commands
     public class CreateTypeDePropriete : TypeDeProprieteBaseCommand
     {
         
-        public override Guid Id { get; set; }
+        public override string Id { get; set; }
         
         
         
         public Property<string> Nom {get;}
 
 
-        public CreateTypeDePropriete(
-            Guid id,Property<string> nom) : base()
+        public CreateTypeDePropriete(string id,Property<string> nom) : base()
         {
             
             Id = id;

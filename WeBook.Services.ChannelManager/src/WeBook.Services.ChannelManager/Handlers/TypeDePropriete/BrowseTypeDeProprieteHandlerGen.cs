@@ -17,7 +17,7 @@ namespace WeBook.Services.ChannelManager.Handlers
     /// <summary>
     /// Browse TypeDePropriete Handler
     /// </summary>
-    public partial class BrowseTypeDeProprieteHandler : BaseBrowseHandler<TypeDePropriete, BrowseTypeDeProprietes, TypeDeProprieteDto, IBrowseTypeDeProprieteRepository>
+    public partial class BrowseTypeDeProprieteHandler : BaseBrowseHandler<TypeDePropriete,string, BrowseTypeDeProprietes, TypeDeProprieteDto, IBrowseTypeDeProprieteRepository>
     {
         public BrowseTypeDeProprieteHandler(IBrowseTypeDeProprieteRepository repository, IMapper mapper,ILogger<BrowseTypeDeProprieteHandler> logger): base(repository, mapper,logger){}
     }

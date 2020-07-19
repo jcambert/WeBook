@@ -21,7 +21,7 @@ namespace WeBook.Services.ChannelManager.Handlers
     /// <summary>
     /// Update Propriete Handler
     /// </summary>
-    public partial class UpdateProprieteHandler : DomainCommandHandler<UpdatePropriete, Propriete>
+    public partial class UpdateProprieteHandler : DomainCommandHandler<UpdatePropriete, Propriete,Guid>
     {
         #region Constructors
         public UpdateProprieteHandler(
@@ -58,6 +58,7 @@ namespace WeBook.Services.ChannelManager.Handlers
             
             await base.HandleAsync(command, context);
             var product = GetDomainObject(command);
+            product.UpdatedDate = DateTime.Now;
             await Repository.UpdateAsync(product);
             await BusPublisher.PublishAsync(CreateEvent<ProprieteUpdated>(command), context);
         }

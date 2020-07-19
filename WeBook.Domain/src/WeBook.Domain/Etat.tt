@@ -14,7 +14,7 @@ namespace webook.domain
     /// y compris pour certains territoires (îles en général), non habités de façon permanente. 
     /// Chacune de ces entités reçoit ainsi un code à deux lettres, 
     /// un code à trois lettres et un code numérique
-    /// </summary>
+    /// </summary>test
     public  readonly partial struct Etat{
     <#
 	var path = Host.ResolvePath(string.Empty);

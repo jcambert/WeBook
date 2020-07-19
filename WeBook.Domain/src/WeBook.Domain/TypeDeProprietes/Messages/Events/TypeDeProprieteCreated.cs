@@ -12,16 +12,14 @@ namespace webook.domain.typeDeProprietes.Messages.Events
 {
     public class TypeDeProprieteCreated : TypeDeProprieteBaseEvent
     {
-        public Guid Id { get; }
+        public override string Id { get; }
 
         
         public Property<string>  Nom{get;}
         
         
         #region Constructor
-        public TypeDeProprieteCreated(Guid id,
-        Property<string> nom
-        )
+        public TypeDeProprieteCreated(string id,Property<string> nom)
         {
             Id = id;
             Nom = nom ;

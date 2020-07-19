@@ -21,7 +21,7 @@ namespace WeBook.Services.ChannelManager.Repositories
     /// <summary>
     /// TypeDePropriete Repository for intereaction with database
     /// </summary>
-    public interface IBrowseTypeDeProprieteRepository : IBrowseRepository<TypeDePropriete,BrowseTypeDeProprietes,TypeDeProprieteDto>{}
+    public interface IBrowseTypeDeProprieteRepository : IBrowseRepository<TypeDePropriete,string,BrowseTypeDeProprietes,TypeDeProprieteDto>{}
     #endregion 
 
     #region Implementation
@@ -29,9 +29,9 @@ namespace WeBook.Services.ChannelManager.Repositories
     /// TypeDePropriete Repository for intereaction with database
     /// </summary>
     [Repository(typeof(IBrowseTypeDeProprieteRepository))]
-    public partial class TypeDeProprieteRepository : BrowseRepository<TypeDePropriete,BrowseTypeDeProprietes,TypeDeProprieteDto>,IBrowseTypeDeProprieteRepository 
+    public partial class TypeDeProprieteRepository : BrowseRepository<TypeDePropriete,string,BrowseTypeDeProprietes,TypeDeProprieteDto>,IBrowseTypeDeProprieteRepository 
     {
-        public TypeDeProprieteRepository(IMongoRepository<TypeDePropriete> repository, IMapper mapper) : base(repository,mapper){}
+        public TypeDeProprieteRepository(IMongoRepository<TypeDePropriete,string> repository, IMapper mapper) : base(repository,mapper){}
         
     }
     #endregion

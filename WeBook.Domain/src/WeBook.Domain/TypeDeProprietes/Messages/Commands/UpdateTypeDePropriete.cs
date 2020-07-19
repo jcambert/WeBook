@@ -17,7 +17,7 @@ namespace webook.domain.typeDeProprietes.Messages.Commands
     public class UpdateTypeDePropriete : CreateTypeDePropriete
     {
         
-        public UpdateTypeDePropriete(Guid id,Property<string> nom) : base(id,nom)
+        public UpdateTypeDePropriete(string id,Property<string> nom) : base(id,nom)
         {
         }
     }

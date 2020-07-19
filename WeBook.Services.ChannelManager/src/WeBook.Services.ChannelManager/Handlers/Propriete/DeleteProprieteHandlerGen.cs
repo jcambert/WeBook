@@ -23,7 +23,7 @@ namespace WeBook.Services.ChannelManager.Handlers
     /// <summary>
     /// Delete Propriete Handler
     /// </summary>
-    public partial class DeleteProprieteHandler : DomainCommandHandler<DeletePropriete, Propriete>
+    public partial class DeleteProprieteHandler : DomainCommandHandler<DeletePropriete, Propriete,Guid>
     {
         #region Constructors
         public DeleteProprieteHandler(

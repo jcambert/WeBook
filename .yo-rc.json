@@ -17,6 +17,11 @@
         "project": "WeBook.Services.ChannelManager/src/WeBook.Services.ChannelManager/WeBook.Services.ChannelManager.csproj"
       },
       {
+        "name": "WeBook.Services.GeoLoc",
+        "path": "WeBook.Services.GeoLoc",
+        "project": "WeBook.Services.GeoLoc/WeBook.Services.GeoLoc.csproj"
+      },
+      {
         "name": "WeBook.Services.Identity",
         "path": "WeBook.Services.Identity/src/WeBook.Services.Identity",
         "project": "WeBook.Services.Identity/src/WeBook.Services.Identity/WeBook.Services.Identity.csproj"
@@ -49,7 +54,7 @@
         "path": "WeBook.Services.ChannelManager/src/WeBook.Services.ChannelManager",
         "project": "WeBook.Services.ChannelManager/src/WeBook.Services.ChannelManager/WeBook.Services.ChannelManager.csproj"
       },
-      "domain": "propriete",
+      "domain": "typeDePiece",
       "subdoc": false,
       "entity": true,
       "crud": true,
@@ -57,90 +62,6 @@
       "props": [
         {
           "name": "Nom",
-          "type": "string",
-          "isprimitive": true,
-          "dynamic": false
-        },
-        {
-          "name": "Telephone",
-          "type": "string",
-          "isprimitive": true,
-          "dynamic": false
-        },
-        {
-          "name": "Fax",
-          "type": "string",
-          "isprimitive": true,
-          "dynamic": false
-        },
-        {
-          "name": "Email",
-          "type": "string",
-          "isprimitive": true,
-          "dynamic": false
-        },
-        {
-          "name": "SiteWeb",
-          "type": "string",
-          "isprimitive": true,
-          "dynamic": false
-        },
-        {
-          "name": "NomDuContact",
-          "type": "string",
-          "isprimitive": true,
-          "dynamic": false
-        },
-        {
-          "name": "PrenomDuContact",
-          "type": "string",
-          "isprimitive": true,
-          "dynamic": false
-        },
-        {
-          "name": "Devise",
-          "type": "string",
-          "isprimitive": true,
-          "dynamic": false
-        },
-        {
-          "name": "SymboleDeDeviseAvantLePrix",
-          "type": "string",
-          "isprimitive": true,
-          "dynamic": false
-        },
-        {
-          "name": "SymboleDeDeviseApresLePrix",
-          "type": "string",
-          "isprimitive": true,
-          "dynamic": false
-        },
-        {
-          "name": "TypeDeLocation",
-          "type": "string",
-          "isprimitive": true,
-          "dynamic": false
-        },
-        {
-          "name": "IdentifiantAutorite",
-          "type": "string",
-          "isprimitive": true,
-          "dynamic": false
-        },
-        {
-          "name": "OrdreAffichage",
-          "type": "int",
-          "isprimitive": true,
-          "dynamic": false
-        },
-        {
-          "name": "PolitiqueGenerale",
-          "type": "string",
-          "isprimitive": true,
-          "dynamic": true
-        },
-        {
-          "name": "PolitiqueAnnulation",
           "type": "string",
           "isprimitive": true,
           "dynamic": true
@@ -160,7 +81,7 @@
         "path": "WeBook.Services.ChannelManager/src/WeBook.Services.ChannelManager",
         "project": "WeBook.Services.ChannelManager/src/WeBook.Services.ChannelManager/WeBook.Services.ChannelManager.csproj"
       },
-      "domain": "propriete"
+      "domain": "typeDePiece"
     }
   }
 }

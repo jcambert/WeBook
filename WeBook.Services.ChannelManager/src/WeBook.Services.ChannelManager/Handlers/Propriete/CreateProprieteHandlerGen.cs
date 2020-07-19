@@ -21,7 +21,7 @@ namespace WeBook.Services.ChannelManager.Handlers
     /// <summary>
     /// Delete Propriete Handler
     /// </summary>
-    public partial class CreateProprieteHandler : DomainCommandHandler<CreatePropriete,Propriete>
+    public partial class CreateProprieteHandler : DomainCommandHandler<CreatePropriete,Propriete,Guid>
     {
         
 
@@ -61,7 +61,8 @@ namespace WeBook.Services.ChannelManager.Handlers
             await base.HandleAsync(command, context);
 
             var product = GetDomainObject(command);
-            
+            product.CreatedDate=product.UpdatedDate = DateTime.Now;
+
             await Repository.AddAsync(product);
 
             await BusPublisher.PublishAsync(CreateEvent<ProprieteCreated>(command), context);
